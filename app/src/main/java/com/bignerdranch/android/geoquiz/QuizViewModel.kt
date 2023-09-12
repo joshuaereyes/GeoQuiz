@@ -10,12 +10,12 @@ const val IS_CHEATER_KEY = "IS_CHEATER_KEY"
 
 class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
     private val questionBank = listOf(
-        Question(R.string.question_australia, true),
-        Question(R.string.question_oceans, true),
-        Question(R.string.question_mideast, false),
-        Question(R.string.question_africa, false),
-        Question(R.string.question_americas, true),
-        Question(R.string.question_asia, true)
+        Question(R.string.question_barca, true),
+        Question(R.string.question_balondor, true),
+        Question(R.string.question_premier, false),
+        Question(R.string.question_mls, false),
+        Question(R.string.question_america, true),
+        Question(R.string.question_national, true)
     )
     var isCheater: Boolean
         get() = savedStateHandle.get(IS_CHEATER_KEY) ?: false
@@ -30,5 +30,11 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         get() = questionBank[currentIndex].textResId
     fun moveToNext() {
         currentIndex = (currentIndex + 1) % questionBank.size
+    }
+    fun moveToPrevious() {
+        if(currentIndex== 0)
+            currentIndex = questionBank.size - 1
+        else
+            currentIndex -= 1
     }
 }

@@ -31,12 +31,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private val questionBank = listOf(
-        Question(R.string.question_australia, true),
-        Question(R.string.question_oceans, true),
-        Question(R.string.question_mideast, false),
-        Question(R.string.question_africa, false),
-        Question(R.string.question_americas, true),
-        Question(R.string.question_asia, true))
+        Question(R.string.question_barca, true),
+        Question(R.string.question_balondor, true),
+        Question(R.string.question_premier, false),
+        Question(R.string.question_mls, false),
+        Question(R.string.question_america, true),
+        Question(R.string.question_national, true))
     private var currentIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +54,10 @@ class MainActivity : AppCompatActivity() {
         }
         binding.nextButton.setOnClickListener {
             quizViewModel.moveToNext()
+            updateQuestion()
+        }
+        binding.previousButton.setOnClickListener {
+            quizViewModel.moveToPrevious()
             updateQuestion()
         }
         binding.cheatButton.setOnClickListener {
