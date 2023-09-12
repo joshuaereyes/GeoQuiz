@@ -48,13 +48,17 @@ class MainActivity : AppCompatActivity() {
 
         binding.trueButton.setOnClickListener { view: View ->
             checkAnswer(true)
+            disableButtons()
+
         }
         binding.falseButton.setOnClickListener { view: View ->
             checkAnswer(false)
+            disableButtons()
         }
         binding.nextButton.setOnClickListener {
             quizViewModel.moveToNext()
             updateQuestion()
+            enableButtons()
         }
         binding.previousButton.setOnClickListener {
             quizViewModel.moveToPrevious()
@@ -93,7 +97,15 @@ class MainActivity : AppCompatActivity() {
         val questionTextResId = quizViewModel.currentQuestionText
         binding.questionTextView.setText(questionTextResId)
     }
+    private fun disableButtons(){
+        binding.trueButton.isEnabled = false
+        binding.falseButton.isEnabled = false
+    }
 
+    private fun enableButtons(){
+        binding.trueButton.isEnabled = true
+        binding.falseButton.isEnabled = true
+    }
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
         val messageResId = when {
